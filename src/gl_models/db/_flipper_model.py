@@ -1,9 +1,9 @@
-from arm_angles import ArmAngles
+from flipper_angles import FlipperAngles
 from OpenGL import GL as gl
-from . import cube_model, block_model
+from .. import cube_model, block_model
 
 
-def draw_arm_base(angles: ArmAngles, texture_id: int, l=True):
+def draw_arm_base(angles: FlipperAngles, texture_id: int, l=True):
     
     """Modelo do braço.
      Trata-se das sequências de matrizes que são enviadas

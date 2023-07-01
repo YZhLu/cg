@@ -2,10 +2,10 @@
 
 import unittest
 
-from src.arm_angles import ArmAngles
+from src.flipper_angles import FlipperAngles
 
 
-class ArmAnglesTestCase(unittest.TestCase):
+class FlipperAnglesTestCase(unittest.TestCase):
 
     @staticmethod
     def __gerate_angles_to_test(max_angle: float, min_angle: float) -> tuple[list[float], list[float]]:
@@ -28,7 +28,7 @@ class ArmAnglesTestCase(unittest.TestCase):
     def test_base_angle_limits(self):
         """Testando limites dos os anglos da base"""
 
-        arm_angles = ArmAngles()
+        arm_angles = FlipperAngles()
 
         input_angles, expected_angles = self.__gerate_angles_to_test(
             min_angle=0, max_angle=360.0)
@@ -43,7 +43,7 @@ class ArmAnglesTestCase(unittest.TestCase):
 
     def test_shoulder_angle_limits(self):
         """Testando limites dos os anglos do ombro"""
-        arm_angles = ArmAngles()
+        arm_angles = FlipperAngles()
 
         input_angles, expected_angles = self.__gerate_angles_to_test(
             min_angle=0, max_angle=180)
@@ -55,7 +55,7 @@ class ArmAnglesTestCase(unittest.TestCase):
     def test_elbow_angle_limits(self):
         """Testando limites dos os anglos do cotovelo"""
 
-        arm_angles = ArmAngles()
+        arm_angles = FlipperAngles()
 
         input_angles, expected_angles = self.__gerate_angles_to_test(
             min_angle=0, max_angle=135)
@@ -66,7 +66,7 @@ class ArmAnglesTestCase(unittest.TestCase):
 
     def test_claw_angle_limits(self):
         """Testando limites dos os anglos da garra"""
-        arm_angles = ArmAngles()
+        arm_angles = FlipperAngles()
 
         input_angles, expected_angles = self.__gerate_angles_to_test(
             min_angle=0, max_angle=17)

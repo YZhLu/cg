@@ -9,7 +9,7 @@ import cv2
 
 from keyboard_controler import KeyboardController
 from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model, c, d
-from arm_angles import ArmAngles
+from flipper_angles import FlipperAngles
 
 """
 Por padrão inicia-se
@@ -145,7 +145,7 @@ def main():
     camera = Camera()
 
     """instanciado os ângulos do braço, por padrão é tudo 0 graus"""
-    arm_angles = ArmAngles()
+    arm_angles = FlipperAngles()
     keyboard_controler = KeyboardController(arm_angles, camera)
 
     """
@@ -184,7 +184,7 @@ def main():
         #gl.glTranslatef(-3.0, 0.5, 0.0) #translada o braço
         #arm_model.draw_arm(arm_angles, arm_texture_id)
         #base_position = [1.0, 1.0, 1.0]
-        flipper_model.draw(arm_angles, arm_texture_id, True)
+        flipper_model.draw(arm_angles, arm_texture_id)
         flipper_model.draw(arm_angles, arm_texture_id, False)
         #flipper_model.draw_arm_base(arm_angles, 1)
         #flipper_model.draw_arm_base(arm_angles, 0)
