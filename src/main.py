@@ -8,9 +8,8 @@ import numpy as np
 import cv2
 
 from keyboard_controler import KeyboardController
-from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model
+from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model, c, d
 from arm_angles import ArmAngles
-
 
 """
 Por padrão inicia-se
@@ -81,8 +80,8 @@ def window_init():
         Configurações iniciais do gestor de janelas GLUT
         basicamente a janela se posiciona na
         posição:
-            x: 400
-            y: 400
+            x: 100
+            y: 100
         foi colocado o nome da janela, que ela possui profundidade e que renderiza em RGBA
     """
     glut.glutInit()
@@ -141,7 +140,6 @@ def load_texture(image_path: Path) -> int:
 def main():
 
     window_init()
-
     opengl_init()
 
     camera = Camera()
@@ -181,12 +179,15 @@ def main():
         
         cage_model.draw()
         
-        gl.glTranslatef(-3.0, 0.5, 0.0) #translada o braço
+        #c.draw(1,2)
+        #d.draw(1,2)
+        #gl.glTranslatef(-3.0, 0.5, 0.0) #translada o braço
         #arm_model.draw_arm(arm_angles, arm_texture_id)
         #base_position = [1.0, 1.0, 1.0]
-        flipper_model.draw_arm_base(arm_angles, arm_texture_id)
-        flipper_model.draw_arm_base(arm_angles, 1)
-        flipper_model.draw_arm_base(arm_angles, 0)
+        flipper_model.draw(arm_angles, arm_texture_id, True)
+        flipper_model.draw(arm_angles, arm_texture_id, False)
+        #flipper_model.draw_arm_base(arm_angles, 1)
+        #flipper_model.draw_arm_base(arm_angles, 0)
 
         gl.glPopMatrix()
 
