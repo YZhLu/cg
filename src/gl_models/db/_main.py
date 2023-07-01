@@ -88,7 +88,7 @@ def window_init():
     glut.glutInitDisplayMode(
         glut.GLUT_RGBA | glut.GLUT_DEPTH | glut.GLUT_DOUBLE | glut.GLUT_ALPHA)
     glut.glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-    glut.glutCreateWindow("Pinball Supreme 2 (made on modo jack bauer)")
+    glut.glutCreateWindow("Pinball Supreme 2")
     glut.glutPositionWindow(100, 100)
 
 
@@ -146,7 +146,7 @@ def main():
 
     """instanciado os ângulos do braço, por padrão é tudo 0 graus"""
     arm_angles = FlipperAngles()
-    keyboard_controller = KeyboardController(arm_angles, camera)
+    keyboard_controler = KeyboardController(arm_angles, camera)
 
     """
         Carregando as texturas, utilizou-se o OpenCV para
@@ -169,6 +169,7 @@ def main():
             Informa-se ao gestor de janela GLUT, para trocar o buffer background para o front (glutSwapBuffers)
             chama-se a função display novamente. (glutPostRedisplay)
         """
+
         gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
         gl.glPushMatrix()
 
@@ -177,11 +178,19 @@ def main():
         floor_model.draw_floor(floor_texture_id)
         
         cage_model.draw()
-
-        keyboard_controller.update_animation()
-
+        
+        #c.draw(1,2)
+        #d.draw(1,2)
+        #gl.glTranslatef(-3.0, 0.5, 0.0) #translada o braço
+        #arm_model.draw_arm(arm_angles, arm_texture_id)
+        #base_position = [1.0, 1.0, 1.0]
+        
+        
+        
         flipper_model.draw(arm_angles, arm_texture_id)
         flipper_model.draw(arm_angles, arm_texture_id, False)
+        #flipper_model.draw_arm_base(arm_angles, 1)
+        #flipper_model.draw_arm_base(arm_angles, 0)
 
         gl.glPopMatrix()
         glut.glutSwapBuffers()
@@ -192,10 +201,10 @@ def main():
        são funções callbacks que são chamadas no momento que uma tecla é pressionada.
     """
     def normal_keys_handler(key: bytes, x: int, y: int):
-        keyboard_controller.key_press(key)
+        keyboard_controler.key_press(key)
 
     def special_keys_handler(key: int, x: int, y: int):
-        keyboard_controller.special_key_press(key)
+        keyboard_controler.special_key_press(key)
 
     """ conjunto de funções do gerenciador de janelas"""
     glut.glutDisplayFunc(display)
