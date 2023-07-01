@@ -4,13 +4,13 @@ from OpenGL import GL as gl
 def draw_floor(texture_id: int):
     """
         Modelo do chão.
-        Desenha um quadrado 20x20 com uma textura
+        Desenha um quadrado 30x20 com uma textura
 
-        (10,-10)--------------------------(-20,-10)             
+        (10, 10)--------------------------(-20,10)             
             |                             |     
             |                             | 
             |                             |
-        (10.10) ------------------------(-20,10) #(x,z)
+        (10. -10) ------------------------(-20, -10) #(x,z)
     """
     gl.glColor4f(1.0, 1.0, 1.0, 1.0)
 

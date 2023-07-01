@@ -47,7 +47,7 @@ class ArmAngles:
     def shoulder_in_degrees(self, angle_in_degrees: float) -> None:
         """atualiza o angulo do ombro mas só se o angulo for válido."""
 
-        if 0 <= angle_in_degrees <= 180:
+        if True or 0 <= angle_in_degrees <= 180:
             self.__shoulder_in_degrees = angle_in_degrees
 
     @elbow_in_degrees.setter
