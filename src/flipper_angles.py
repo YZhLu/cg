@@ -73,7 +73,6 @@ class FlipperAngles:
         """
             atualiza e retorna o angulo da garra mas só atualiza se o angulo for válido.
         """
-
         if 0 <= angle_in_degrees <= 17:
             self.__claw_in_degrees = angle_in_degrees
 
