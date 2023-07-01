@@ -1,9 +1,9 @@
-from arm_angles import ArmAngles
+from flipper_angles import FlipperAngles
 from OpenGL import GL as gl
 from . import cube_model
 
 
-def draw_arm(angles: ArmAngles, texture_id: int):
+def draw_arm(angles: FlipperAngles, texture_id: int):
     """Modelo do braço.
      Trata-se das sequências de matrizes que são enviadas
      ao OpenGL para desenhar o braço com textura.

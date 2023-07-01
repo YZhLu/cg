@@ -1,20 +1,20 @@
 
 from camera import Camera
 from OpenGL import GLUT as glut
-from arm_angles import ArmAngles
+from flipper_angles import FlipperAngles
 
 """
     Teclas que controlam os ângulos do braço e a câmera.
-    Essa classe foi criada para a ArmAngles não depender do OpenGL para atualizar os ângulos.
+    Essa classe foi criada para a FlipperAngles não depender do OpenGL para atualizar os ângulos.
     M-V-C
 """
 class KeyboardController:
-    __arm_angles: ArmAngles
+    __arm_angles: FlipperAngles
     __cam: Camera
     __claw_in_degrees = 0
     __theta_xz = 0
 
-    def __init__(self, arm: ArmAngles, cam: Camera) -> None:
+    def __init__(self, arm: FlipperAngles, cam: Camera) -> None:
         self.__arm_angles = arm
         self.__cam = cam
 
@@ -23,9 +23,19 @@ class KeyboardController:
         match key.decode():
             case 'A':
                 self.__arm_angles.shoulder_in_degrees += 5
+                self.__arm_angles.left_flipper_in_degrees += 5
 
             case 'a':
                 self.__arm_angles.shoulder_in_degrees -= 5
+                self.__arm_angles.left_flipper_in_degrees -= 5
+            
+            case 'D':
+                #self.__arm_angles.shoulder_in_degrees += 5
+                self.__arm_angles.right_flipper_in_degrees += 5
+
+            case 'd':
+                #self.__arm_angles.shoulder_in_degrees -= 5
+                self.__arm_angles.right_flipper_in_degrees -= 5
 
             case 'S':
                 self.__arm_angles.elbow_in_degrees += 5
