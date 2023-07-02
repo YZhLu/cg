@@ -1,8 +1,8 @@
-""" from OpenGL import GL as gl
+from OpenGL import GL as gl
 import numpy as np
 import math
 
-def draw(radius: float, height: float, texture_id: int, num_segments: int = 50):
+def draw(radius: float = 1, height: float = 1, texture_id: int = 2, num_segments: int = 50):
     angle_step = 2 * math.pi / num_segments
 
     n = [
@@ -23,6 +23,33 @@ def draw(radius: float, height: float, texture_id: int, num_segments: int = 50):
     gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)
     gl.glBindTexture(gl.GL_TEXTURE_2D, texture_id)
 
+    
+
+    # Topo
+    gl.glBegin(gl.GL_TRIANGLE_FAN)
+    gl.glNormal3fv(n[0])
+    gl.glTexCoord2fv([0.5, 0.5])
+    gl.glVertex3fv([0.0, height / 2, 0.0])
+    for i in range(num_segments + 1):
+        angle = i * angle_step
+        gl.glNormal3fv(n[0])
+        gl.glTexCoord2fv([0.5 + 0.5 * math.cos(angle), 0.5 + 0.5 * math.sin(angle)])
+        gl.glVertex3fv([radius * math.cos(angle), height / 2, radius * math.sin(angle)])
+    gl.glEnd()
+
+    # Base
+    gl.glBegin(gl.GL_TRIANGLE_FAN)
+    gl.glNormal3fv(n[1])
+    gl.glTexCoord2fv([0.5, 0.5])
+    gl.glVertex3fv([0.0, -height / 2, 0.0])
+    for i in range(num_segments + 1):
+        angle = i * angle_step
+        gl.glNormal3fv(n[1])
+        gl.glTexCoord2fv([0.5 + 0.5 * math.cos(angle), 0.5 + 0.5 * math.sin(angle)])
+        gl.glVertex3fv([radius * math.cos(angle), -height / 2, radius * math.sin(angle)])
+    gl.glEnd()
+    
+    gl.glColor3f(0.29, 0.29, 0.29)
     for i in range(num_segments):
         gl.glBegin(gl.GL_QUADS)
 
@@ -38,31 +65,8 @@ def draw(radius: float, height: float, texture_id: int, num_segments: int = 50):
         gl.glVertex3fv(v[i + num_segments])
 
         gl.glEnd()
-
-    # Topo
-    gl.glBegin(gl.GL_TRIANGLE_FAN)
-    gl.glNormal3fv(n[0])
-    gl.glTexCoord2fv([0.5, 0.5])
-    gl.glVertex3fv([0.0, height / 2, 0.0])
-    for i in range(num_segments):
-        angle = i * angle_step
-        gl.glNormal3fv(n[0])
-        gl.glTexCoord2fv([0.5 + 0.5 * math.cos(angle), 0.5 + 0.5 * math.sin(angle)])
-        gl.glVertex3fv([radius * math.cos(angle), height / 2, radius * math.sin(angle)])
-    gl.glEnd()
-
-    # Base
-    gl.glBegin(gl.GL_TRIANGLE_FAN)
-    gl.glNormal3fv(n[1])
-    gl.glTexCoord2fv([0.5, 0.5])
-    gl.glVertex3fv([0.0, -height / 2, 0.0])
-    for i in range(num_segments):
-        angle = i * angle_step
-        gl.glNormal3fv(n[1])
-        gl.glTexCoord2fv([0.5 + 0.5 * math.cos(angle), 0.5 + 0.5 * math.sin(angle)])
-        gl.glVertex3fv([radius * math.cos(angle), -height / 2, radius * math.sin(angle)])
-    gl.glEnd()
- """
+    
+"""
 from OpenGL import GL as gl
 import numpy as np
 import math
@@ -74,13 +78,13 @@ def draw(R, G, B, texture_id):
     z = 0.0
     angle = 0.0
     angle_stepsize = 0.1
-    # num_segments = 2*math.pi * angle_stepsize
+    num_segments = 2*math.pi * angle_stepsize
 
 
-    # n = [
-    #     [0.0, 1.0, 0.0],  # Topo
-    #     [0.0, -1.0, 0.0],  # Base
-    # ]
+    n = [
+        [0.0, 1.0, 0.0],  # Topo
+        [0.0, -1.0, 0.0],  # Base
+    ]
 
     # v = np.zeros(shape=(2 * int(num_segments), 3))
     # for i in range(int(num_segments)):
@@ -98,7 +102,7 @@ def draw(R, G, B, texture_id):
     # 
     # Draw the tube
     #gl.glColor3ub(R-40, G-40, B-40)
-    gl.glColor3f(0.3, 0.3, 0.3)
+    gl.glColor3f(1,1.0,0.54)
     gl.glBegin(gl.GL_QUAD_STRIP)
     angle = 0.0
     while angle < 2 * math.pi:
@@ -134,3 +138,5 @@ def draw(R, G, B, texture_id):
         angle += angle_stepsize
     gl.glVertex3f(radius, 0.0, 0.0)
     gl.glEnd()
+    
+"""
