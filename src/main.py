@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 from keyboard_controller import KeyboardController
-from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model, c, d
+from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model, c, d, bumpper_model, bumppers_model
 from flipper_angles import FlipperAngles
 
 """
@@ -177,6 +177,10 @@ def main():
         floor_model.draw_floor(floor_texture_id)
         
         cage_model.draw()
+        
+        #d#1.0, 2.0, 255, 0, 0)
+        #bumpper_model.draw(size = [1, 2, 1], pos = [0,0,0], color=[255, 0, 0], texture_id=2)
+        bumppers_model.draw()
 
         keyboard_controller.update_animation()
 
