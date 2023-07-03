@@ -24,7 +24,7 @@ class FlipperAngles:
     @left_flipper_in_degrees.setter
     def left_flipper_in_degrees(self, angle_in_degrees: float) -> float:
         """
-            atualiza e retorna o angulo da garra mas só atualiza se o angulo for válido.
+            atualiza e retorna o angulo do flipper esquerdo.
         """
         self.__left_flipper_in_degrees = angle_in_degrees
         return self.__left_flipper_in_degrees
@@ -32,7 +32,7 @@ class FlipperAngles:
     @right_flipper_in_degrees.setter
     def right_flipper_in_degrees(self, angle_in_degrees: float) -> float:
         """
-            atualiza e retorna o angulo da garra mas só atualiza se o angulo for válido.
+            atualiza e retorna o angulo do flipper direito.
         """
         self.__right_flipper_in_degrees = angle_in_degrees
         return self.__right_flipper_in_degrees

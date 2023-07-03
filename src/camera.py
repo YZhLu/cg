@@ -4,7 +4,7 @@ import numpy as np
 
 
 class Camera:
-    position = [6.0, 7.0, 0.0]
+    position = [6.0, 20.0, 0.0]
     look = [0.0, 3.0, 0.0]
 
 

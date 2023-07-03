@@ -5,9 +5,9 @@ from . import prisma_model, block_model
 
 def draw(angles: FlipperAngles, texture_id: int, l=True):
     
-    """Modelo do braço.
+    """Modelo do flipper.
      Trata-se das sequências de matrizes que são enviadas
-     ao OpenGL para desenhar o braço com textura.
+     ao OpenGL para desenhar o flipper com textura.
     """
 
     if(l):
