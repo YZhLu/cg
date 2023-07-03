@@ -8,8 +8,10 @@ import numpy as np
 import cv2
 
 from keyboard_controller import KeyboardController
-from gl_models import arm_model, floor_model, cube_model, cage_model, flipper_model, c, d, bumpper_model, bumppers_model, sphere_model, ball_model
+from ball_controller import BallController
+from gl_models import floor_model, cage_model, flipper_model, bumppers_model, ball_model
 from flipper_angles import FlipperAngles
+from ball_position import BallPosition
 
 """
 Por padrão inicia-se
@@ -144,9 +146,14 @@ def main():
 
     camera = Camera()
 
+    
+    """instanciado a posicao da bola, por padrão é tudo 0 graus"""
+    ball_position = BallPosition()
+    ball_controller = BallController(ball_position)
     """instanciado os ângulos do braço, por padrão é tudo 0 graus"""
-    arm_angles = FlipperAngles()
-    keyboard_controller = KeyboardController(arm_angles, camera)
+    flippers_angles = FlipperAngles()
+    keyboard_controller = KeyboardController(flippers_angles, camera)
+    
 
     """
         Carregando as texturas, utilizou-se o OpenCV para
@@ -178,15 +185,17 @@ def main():
         
         cage_model.draw()
         
-        ball_model.draw(pos=[1,1,1],color=[1,0.3,0.4])
+        # ball_model.draw(pos=[1,1,1],color=[1,0.3,0.4])
+        ball_model.draw(ball_position, color=[1, 0.3, 0.4], size=[ball_position.sphere_radius, ball_position.sphere_radius, ball_position.sphere_radius])
         #d#1.0, 2.0, 255, 0, 0)
         #bumpper_model.draw(size = [1, 2, 1], pos = [0,0,0], color=[255, 0, 0], texture_id=2)
         bumppers_model.draw()
 
         keyboard_controller.update_animation()
+        ball_controller.update_sphere()
 
-        flipper_model.draw(arm_angles, arm_texture_id)
-        flipper_model.draw(arm_angles, arm_texture_id, False)
+        flipper_model.draw(flippers_angles, arm_texture_id)
+        flipper_model.draw(flippers_angles, arm_texture_id, False)
 
         gl.glPopMatrix()
         glut.glutSwapBuffers()
