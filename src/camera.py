@@ -12,7 +12,6 @@ class Camera:
         """
             Atualizando a posição da câmera utilizando o sistema polar de coordenadas, pode-se fazer com que
             a câmera gire em torno de um ponto.
-            Experimentalmente utilizando um raio igual 6 foi obtida uma boa visualização.
         """
         angle_in_rads = np.deg2rad(angle_xz_in_degrees)
         self.position[0] = ray_xz*np.cos(angle_in_rads)

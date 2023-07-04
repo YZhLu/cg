@@ -2,15 +2,6 @@
 
 pinball (kindof)
 
-
-
-
-<!-- ## Execute os testes !!
-
-```shell
-python -m unittest discover  -v 
-``` -->
-
 ## Instale as dependências 
 ```shell
 pip install -r requirements.txt
@@ -24,7 +15,7 @@ Foi utilizado a versão __3.10__ do python
 python  src/main.py    
 ```
 
-### Controle do braço
+### Controle dos flippers 
 
 - q aciona flipper esquerdo
 - p acdiona flipper direito
