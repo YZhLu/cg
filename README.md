@@ -5,11 +5,11 @@ pinball (kindof)
 
 
 
-## Execute os testes !!
+<!-- ## Execute os testes !!
 
 ```shell
 python -m unittest discover  -v 
-```
+``` -->
 
 ## Instale as dependências 
 ```shell
