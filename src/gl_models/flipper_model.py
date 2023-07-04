@@ -11,7 +11,6 @@ def draw(angles: FlipperAngles, texture_id: int, l=True):
     """
 
     if(l):
-    #  origem posicionada no centro do braco
         gl.glPushMatrix()
         gl.glTranslatef(5.6, 0.0, 3.2)
         gl.glRotatef(-45, 0.0, 1.0, 0.0)
