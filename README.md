@@ -1,6 +1,6 @@
 # Projeto Final
 
-simulação de um braço robótico
+pinball (kindof)
 
 
 
@@ -26,16 +26,12 @@ python  src/main.py
 
 ### Controle do braço
 
-- A aumenta o angulo do ombro
-- a diminui o angulo do ombro
-- S aumenta o angulo do cotovelo
-- s diminui o angulo do cotovelo
-- B aumenta o angulo da base
-- b diminui o angulo da base
-- C abre a garra
-- c fecha a garra 
+- q aciona flipper esquerdo
+- p acdiona flipper direito
+- space lança a bola 
+
 
 Setinhas, esquerda, direita, frente e trás controla a visão da camera.
 
 
-![imagem_exemplo](images/braco_robotico.png)
+<!-- ![imagem_exemplo](images/braco_robotico.png) -->

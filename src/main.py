@@ -29,7 +29,11 @@ usa-se a classe Path do python, mas
 é bom lembrar que esse script deve ser
 executado dentro do diretório projeto_final
 """
-FLOOR_IMAGE_PATH = Path('images').joinpath('piso_2.jpeg')
+FLOOR_IMAGE_PATH = Path('images').joinpath('solar3.jpg')
+# FLOOR_IMAGE_PATH = Path('images').joinpath('pinball2.jpg')
+# FLOOR_IMAGE_PATH = Path('images').joinpath('sonic.png')
+# FLOOR_IMAGE_PATH = Path('images').joinpath('fausto.jpg')
+# FLOOR_IMAGE_PATH = Path('images').joinpath('piso_2.jpeg')
 METAL_IMAGE_PATH = Path('images').joinpath('metal.jpeg')
 
 
@@ -162,7 +166,7 @@ def main():
 
     floor_texture_id = load_texture(FLOOR_IMAGE_PATH)
 
-    arm_texture_id = load_texture(METAL_IMAGE_PATH)
+    flipper_texture_id = load_texture(METAL_IMAGE_PATH)
 
     def display():
         """
@@ -194,8 +198,8 @@ def main():
         keyboard_controller.update_animation()
         ball_controller.update_sphere()
 
-        flipper_model.draw(flippers_angles, arm_texture_id)
-        flipper_model.draw(flippers_angles, arm_texture_id, False)
+        flipper_model.draw(flippers_angles, flipper_texture_id)
+        flipper_model.draw(flippers_angles, flipper_texture_id, False)
 
         gl.glPopMatrix()
         glut.glutSwapBuffers()
