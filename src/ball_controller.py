@@ -1,5 +1,6 @@
 from OpenGL import GLUT as glut
 from ball_position import BallPosition
+from flipper_angles import FlipperAngles
 import math
 import numpy as np
 
@@ -10,7 +11,8 @@ class BallController:
     __rSlope: bool
     
     
-    def __init__(self, position: BallPosition) -> None:
+    def __init__(self, position: BallPosition, angles:FlipperAngles) -> None:
+        self.__flipper_angles = angles
         self.__ball_position = position
         self.__damping_factor = 0.95  # Valor de amortecimento (ajuste conforme necessário)
         self.__lSlope = False
@@ -34,6 +36,8 @@ class BallController:
         self.check_left_slope_colision()
         self.check_right_slope_colision()
         self.check_bumper_collision()
+        self.check_flipper_colision_right()
+        self.check_flipper_colision_left() 
         
         # Calcula o fator de amortecimento com base na direção da velocidade
         self.__damping_factor = 0.95 if self.__ball_position.sphere_velocity[0] > 0 else 0.9
@@ -47,6 +51,7 @@ class BallController:
    
     
     bumpers = [(-9.0, -2.0, 0.75), (-9, 2, 1.0), (2, -3.0, 1.0), (2, 3.0, 1.0), (-15, 0, 0.5), (-2, 0, 0.75), (-12, 6, 0.75), (-5, -4.5, 0.75), (-5, 4.5, 0.75), (12, -6, 0.75)]
+    imaginary_spheres = [(5.6, -2.4), (5.6, 2.4)]
     lCageX1 = -18
     lCageX2 = 0
     lCageZ = 9
@@ -67,7 +72,8 @@ class BallController:
     bCageX = 8
     bCageZ1 = 3
     bCageZ2 = -3
-    flipper 
+    lFlipper = ((5.6, 3.2), (6.6, 2.2))
+    rFlipper = ((5.6, -3.2), (6.6, -2.2))
     #(pos = [-9, 0, 2],  size = [0.75, 2, 1.0])
     #(pos = [-9, 0, -2],  size = [1.0, 2, 0.75])
     
@@ -83,7 +89,7 @@ class BallController:
         if (self.__ball_position.sphere_position[0] > self.bCageX + self.__ball_position.sphere_radius):
             self.__ball_position.sphere_position[0] = self.lCageZ #+ self.__ball_position.sphere_radius# Aplica a força gravitacional na direção x crescente
         
-            print("bottom")
+            # print("bottom")
             
     def check_left_colision(self) -> None:
         if (self.__ball_position.sphere_position[0] < self.lCageX2 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[0] > self.lCageX1 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[2] > self.lCageZ - self.__ball_position.sphere_radius):
@@ -95,7 +101,7 @@ class BallController:
         if (self.__ball_position.sphere_position[0] < self.rCageX2 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[0] > self.rCageX1 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[2] < self.rCageZ + self.__ball_position.sphere_radius):
             self.__ball_position.sphere_position[2] = self.rCageZ + self.__ball_position.sphere_radius# Aplica a força gravitacional na direção x crescente
             
-            print("right", self.__ball_position.sphere_position)
+            # print("right", self.__ball_position.sphere_position)
     
     def check_left_slope_colision(self) -> None:
         if (self.__ball_position.sphere_position[0] < self.lSCageX2 + self.__ball_position.sphere_radius and self.__ball_position.sphere_position[0] > self.lSCageX1 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[2] < self.lSCageZ1 - self.__ball_position.sphere_radius and self.__ball_position.sphere_position[2] > self.lSCageZ2 - self.__ball_position.sphere_radius*2):
@@ -113,7 +119,7 @@ class BallController:
             self.__ball_position.sphere_position[0] += self.__ball_position.sphere_velocity[0]
             self.__ball_position.sphere_position[2] -= self.__ball_position.sphere_velocity[2]
            
-            print("left slope")
+            # print("left slope")
         else:
             # if(self.__slope == True):
             #     self.__ball_position.sphere_position[0] = self.__ball_position.sphere_position[0]
@@ -137,7 +143,7 @@ class BallController:
             self.__ball_position.sphere_position[0] += self.__ball_position.sphere_velocity[0]
             self.__ball_position.sphere_position[2] += self.__ball_position.sphere_velocity[2]
            
-            print("right slope")
+            # print("right slope")
         else:
             # if(self.__slope == True):
             #     self.__ball_position.sphere_position[0] = self.__ball_position.sphere_position[0]
@@ -146,7 +152,7 @@ class BallController:
             self.__rSlope = False
     
     def check_bumper_collision(self) -> None:
-        print(self.__ball_position.sphere_velocity[2])
+        # print(self.__ball_position.sphere_velocity[2])
         for bumper in self.bumpers:
             bumper_radius = bumper[2]  # Raio do bumper
             
@@ -181,6 +187,66 @@ class BallController:
                 self.__ball_position.sphere_velocity[0] = -new_direction[0]
                 self.__ball_position.sphere_velocity[2] = -new_direction[2]
 
-    def check_flipper_colision(self) -> None:
+    def check_flipper_colision_right(self) -> None:
 
-        distance = np.sqrt(self.__ball_position.sphere_position[0] - )
+        distance = np.sqrt((self.__ball_position.sphere_position[0] - self.imaginary_spheres[0][0]) ** 2 + (self.__ball_position.sphere_position[2] - self.imaginary_spheres[0][1]) ** 2)
+
+        if(distance < 1.1):
+            angle_rad = np.radians(self.__flipper_angles.right_flipper_in_degrees - 135)
+
+            self.__ball_position.sphere_velocity[0] *= -1  # Inverte a direção da velocidade na direção x
+            self.__ball_position.sphere_velocity[2] *= -1  # Inverte a direção da velocidade na direção z
+                
+                # Atualiza a posição da esfera para evitar que fique presa dentro do bumper
+            self.__ball_position.sphere_position[0] += self.__ball_position.sphere_velocity[0] * 0.1*np.random.uniform(angle_rad)
+            self.__ball_position.sphere_position[2] += self.__ball_position.sphere_velocity[2] * 45*np.random.uniform(angle_rad)
+                
+                # Calcula a direção da colisão com base na velocidade antes da colisão
+            collision_direction = np.array([-self.__ball_position.sphere_velocity[0], 0, -self.__ball_position.sphere_velocity[2]])
+            collision_direction /= np.linalg.norm(collision_direction)  # Normaliza o vetor de direção da colisão
+
+                # Rotaciona a bola em 45 graus em torno do eixo y
+            rotation_angle = math.radians(45)
+            rotation_matrix = np.array([[math.cos(rotation_angle), 0, math.sin(rotation_angle)],
+                                        [0, 1, 0],
+                                        [-math.sin(rotation_angle), 0, math.cos(rotation_angle)]])
+
+                
+            new_direction = np.dot(rotation_matrix, collision_direction)
+                
+            self.__ball_position.sphere_velocity[0] = -new_direction[0]
+            self.__ball_position.sphere_velocity[2] = -new_direction[2]
+
+            print(angle_rad)
+
+    def check_flipper_colision_left(self) -> None:
+
+            distance = np.sqrt((self.__ball_position.sphere_position[0] - self.imaginary_spheres[1][0]) ** 2 + (self.__ball_position.sphere_position[2] - self.imaginary_spheres[1][1]) ** 2)
+
+            if(distance < 1.1):
+                angle_rad = np.radians(self.__flipper_angles.right_flipper_in_degrees - 45)
+
+                self.__ball_position.sphere_velocity[0] *= -1  # Inverte a direção da velocidade na direção x
+                self.__ball_position.sphere_velocity[2] *= -1  # Inverte a direção da velocidade na direção z
+                    
+                    # Atualiza a posição da esfera para evitar que fique presa dentro do bumper
+                self.__ball_position.sphere_position[0] += self.__ball_position.sphere_velocity[0] * 0.2*np.random.uniform(0,angle_rad)
+                self.__ball_position.sphere_position[2] += self.__ball_position.sphere_velocity[2] * 45*np.random.uniform(0,angle_rad)
+                    
+                    # Calcula a direção da colisão com base na velocidade antes da colisão
+                collision_direction = np.array([-self.__ball_position.sphere_velocity[0], 0, -self.__ball_position.sphere_velocity[2]])
+                collision_direction /= np.linalg.norm(collision_direction)  # Normaliza o vetor de direção da colisão
+
+                    # Rotaciona a bola em 45 graus em torno do eixo y
+                rotation_angle = math.radians(45)
+                rotation_matrix = np.array([[math.cos(rotation_angle), 0, math.sin(rotation_angle)],
+                                            [0, 1, 0],
+                                            [-math.sin(rotation_angle), 0, math.cos(rotation_angle)]])
+
+                    
+                new_direction = np.dot(rotation_matrix, collision_direction)
+                    
+                self.__ball_position.sphere_velocity[0] = -new_direction[0]
+                self.__ball_position.sphere_velocity[2] = -new_direction[2]
+
+                print(angle_rad)

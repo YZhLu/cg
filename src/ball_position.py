@@ -10,7 +10,7 @@ class BallPosition:
     def __init__(self) -> None:
         
         self.__sphere_radius = 0.50  # Raio da esfera
-        self.__sphere_position = [-12, 1.0, -4.0]  # Posição inicial da esfera (x, y, z)
+        self.__sphere_position = [1.6, 1.0, 3.2]  # Posição inicial da esfera (x, y, z)
         self.__sphere_velocity = [0.0, 0.0, 0.0]  # Velocidade inicial da esfera (vx, vy, vz)
         self.__gravity = 0.01  
 

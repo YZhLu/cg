@@ -148,11 +148,12 @@ def main():
 
     
     """instanciado a posicao da bola, por padrão é tudo 0 graus"""
-    ball_position = BallPosition()
-    ball_controller = BallController(ball_position)
     """instanciado os ângulos do braço, por padrão é tudo 0 graus"""
     flippers_angles = FlipperAngles()
     keyboard_controller = KeyboardController(flippers_angles, camera)
+
+    ball_position = BallPosition()
+    ball_controller = BallController(ball_position, flippers_angles)
     
 
     """
