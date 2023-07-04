@@ -67,6 +67,7 @@ class BallController:
     bCageX = 8
     bCageZ1 = 3
     bCageZ2 = -3
+    flipper 
     #(pos = [-9, 0, 2],  size = [0.75, 2, 1.0])
     #(pos = [-9, 0, -2],  size = [1.0, 2, 0.75])
     
@@ -179,3 +180,7 @@ class BallController:
                 
                 self.__ball_position.sphere_velocity[0] = -new_direction[0]
                 self.__ball_position.sphere_velocity[2] = -new_direction[2]
+
+    def check_flipper_colision(self) -> None:
+
+        distance = np.sqrt(self.__ball_position.sphere_position[0] - )
